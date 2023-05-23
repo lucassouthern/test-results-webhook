@@ -1,11 +1,23 @@
-const express = require('express');
-const app = express();
+const http = require('http');
+const {
+  result
+} = require('./controllers/resultController');
 
-app.get('/hello', (req, res) => {
-  console.log(1);
-  res.send('This is a test response');
+const server = http.createServer((req, res) => {
+  if (req.url === '/api/results' && req.method === 'POST') {
+    result(req, res);
+  } else {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(
+      JSON.stringify({
+        message: 'Route Not Found: Please use the api/products endpoint',
+      })
+    );
+  }
 });
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
-});
+const PORT = process.env.PORT || 5000;
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+module.exports = server;
