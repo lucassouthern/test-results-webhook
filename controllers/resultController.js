@@ -1,5 +1,3 @@
-const Product = require('../models/productModel')
-
 const { getPostData } = require('../utils')
 
 // @desc    Create a Product
@@ -27,9 +25,5 @@ async function result(req, res) {
 }
 
 module.exports = {
-    getProducts,
-    getProduct,
-    createProduct,
-    updateProduct,
-    deleteProduct
+    result
 }
