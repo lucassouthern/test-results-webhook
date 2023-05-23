@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(
       JSON.stringify({
-        message: 'Route Not Found: Please use the api/products endpoint',
+        message: 'Route Not Found: Please use the api/results endpoint',
       })
     );
   }

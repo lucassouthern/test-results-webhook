@@ -6,18 +6,19 @@ async function result(req, res) {
     try {
         const body = await getPostData(req)
 
-        const { name, description, price } = JSON.parse(body)
+        const { passed } = JSON.parse(body)
+        let exitCode;
 
-        const product = {
-            name,
-            description,
-            price
+        if (passed) {
+            exitCode = 0;
+        } else {
+            exitCode = 1;
         }
+        
+        console.log(exitCode);
 
-        const newProduct = await Product.create(product)
-
-        res.writeHead(201, { 'Content-Type': 'application/json' })
-        return res.end(JSON.stringify(newProduct))  
+        res.writeHead(204, { 'Content-Type': 'application/json' })
+        return res.end(JSON.stringify(exitCode))  
 
     } catch (error) {
         console.log(error)
